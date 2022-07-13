@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:27:06 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 16:59:00 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:17:37 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,22 @@ float	*vec3(float x, float y, float z, float *result)
 
 // norm only allows function that take a maximum of 4 parameters
 
-float	*vec4(const float values[4], float *result)
+struct s_quad	tuple4(float x, float y, float z, float w)
 {
-	result[0] = values[0];
-	result[1] = values[1];
-	result[2] = values[2];
-	result[3] = values[3];
+	struct s_quad	t;
+
+	t.x = x;
+	t.y = y;
+	t.z = z;
+	t.w = w;
+	return (t);
+}
+
+float	*vec4(struct s_quad values, float *result)
+{
+	result[0] = values.x;
+	result[1] = values.y;
+	result[2] = values.z;
+	result[3] = values.w;
 	return (result);
 }

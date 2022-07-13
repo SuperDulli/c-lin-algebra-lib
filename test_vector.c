@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:24:03 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 17:05:38 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:14:10 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_info(float *vec, size_t vec_size)
 
 int	main(void)
 {
-	const float		v4[4] = {1.f, 1.f, 1.f, 1.f};
+	// const float		v4[4] = {1.f, 1.f, 1.f, 1.f};
 	struct s_vec2	vec;
 	float			vec_a[2];
 	float			vec_b[2];
@@ -89,7 +89,7 @@ int	main(void)
 	printf("(1, 0) * (1, 0) = %f\n", vec2_dot(a, a));
 	printf("pos * pos = %f\n", vec2_dot(position, position));
 
-	vec4(v4, homo);
+	vec4(tuple4(1.f, 1.f, 1.f, 1.f), homo);
 	print_info(homo, VEC4_SIZE);
 	vec4_normalize(homo, tmp4);
 	print_info(tmp4, VEC4_SIZE);
