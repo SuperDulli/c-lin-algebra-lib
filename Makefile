@@ -1,6 +1,7 @@
 NAME = test_matrix_lib
 
 SRCS	= vector.c \
+			test_vector.c \
 			# matrix.c
 HEADERS	= $(patsubst %.c,%.h,$(SRCS))
 OBJDIR	= obj
@@ -20,8 +21,12 @@ fclean: clean
 
 re: fclean all
 
+show:
+	@echo SRCS=$(SRCS)
+	@echo OBJS=$(OBJS)
+
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(OBJS) -o $@
 
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -29,4 +34,4 @@ $(OBJDIR)/%.o: %.c | $(OBJDIR)
 $(OBJDIR):
 	mkdir $(OBJDIR)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re show
