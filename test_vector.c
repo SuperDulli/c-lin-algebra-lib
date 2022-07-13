@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:24:03 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 17:14:10 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:36:46 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,11 @@ int	main(void)
 	float			position[VEC2_SIZE];
 	float			homo[VEC4_SIZE];
 
+	float			x[VEC3_SIZE];
+	float			y[VEC3_SIZE];
+	
 	float			tmp[VEC2_SIZE];
+	float			tmp3[VEC3_SIZE];
 	float			tmp4[VEC4_SIZE];
 	vec.x = 1;
 	vec.y = 2;
@@ -93,6 +97,13 @@ int	main(void)
 	print_info(homo, VEC4_SIZE);
 	vec4_normalize(homo, tmp4);
 	print_info(tmp4, VEC4_SIZE);
+
+	vec3(1.f, 0.f, 0.f, x);
+	vec3(0.f, 1.f, 0.f, y);
+	vec3_cross(x, y, tmp3); // positive z
+	print_info(tmp3, VEC3_SIZE);
+	vec3_cross(y, x, tmp3); // negative z
+	print_info(tmp3, VEC3_SIZE);
 
 	return (0);
 }

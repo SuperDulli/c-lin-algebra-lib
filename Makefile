@@ -1,6 +1,6 @@
 NAME = test_matrix_lib
 
-vector	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c
+vector	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c cross.c
 
 SRCS	= $(addprefix vector/,$(vector)) test_vector.c
 			# matrix.c

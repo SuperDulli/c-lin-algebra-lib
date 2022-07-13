@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 12:48:26 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 17:17:13 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:31:54 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ struct				s_vec4
 	};
 };
 
-struct s_quad
+struct				s_quad
 {
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	float			x;
+	float			y;
+	float			z;
+	float			w;
 };
 
 // vec2 functions
@@ -93,6 +93,8 @@ float				*vec3_sub(float *v1, float *v2, float *result);
 float				vec3_dot(float *v1, float *v2);
 bool				vec3_is_zero(float *vec);
 bool				vec3_is_equal(float *v1, float *v2);
+
+float				*vec3_cross(float *v1, float *v2, float *result);
 
 struct s_quad		tuple4(float x, float y, float z, float w);
 float				*vec4(struct s_quad values, float *result);
