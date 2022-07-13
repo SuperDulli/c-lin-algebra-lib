@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 12:48:26 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 13:44:06 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:27:27 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ struct s_vec4
 		float	v[VEC4_SIZE];
 	};
 };
+
+// vec2 functions
+
+float	*vec2(float x, float y, float *result);
+float	vec2_length(float *vec);
+float	vec2_length_squared(float *vec);
+float	*vec2_scalar_mult(float *vec, float s, float *result);
+float	*vec2_normalize(float *vec, float *result);
+float	*vec2_add(float *v1, float *v2, float *result);
+float	*vec2_sub(float *v1, float *v2, float *result);
+float	vec2_dot(float *v1, float *v2);
+bool	vec2_is_zero(float *vec);
+bool	vec2_is_equal(float *v1, float *v2);
 
 void	print_vec2(struct s_vec2 *vec);
 
