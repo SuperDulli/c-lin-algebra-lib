@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:24:03 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 16:05:21 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:05:38 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,40 @@ void	print_info(float *vec, size_t vec_size)
 		len2 = vec2_length_squared(vec);
 		is_zero = vec2_is_zero(vec);
 	}
+	else if (vec_size == 3)
+	{
+		len = vec3_length(vec);
+		len2 = vec3_length_squared(vec);
+		is_zero = vec3_is_zero(vec);
+	}
+	else if (vec_size == 4)
+	{
+		len = vec4_length(vec);
+		len2 = vec4_length_squared(vec);
+		is_zero = vec4_is_zero(vec);
+	}
 	i = 0;
 	while (i < vec_size)
 	{
-		printf("%f, ", vec[i]);
+		printf("%.2f, ", vec[i]);
 		i++;
 	}
-	printf("len=%f, len^2=%f, is_zero=%i\n", len, len2, is_zero);
+	printf("len=%.2f, len^2=%.2f, is_zero=%i\n", len, len2, is_zero);
 }
 
 int	main(void)
 {
+	const float		v4[4] = {1.f, 1.f, 1.f, 1.f};
 	struct s_vec2	vec;
 	float			vec_a[2];
 	float			vec_b[2];
 	float			*a;
 	float			*b;
 	float			position[VEC2_SIZE];
+	float			homo[VEC4_SIZE];
 
 	float			tmp[VEC2_SIZE];
+	float			tmp4[VEC4_SIZE];
 	vec.x = 1;
 	vec.y = 2;
 	print_vec2(&vec);
@@ -73,5 +88,11 @@ int	main(void)
 	printf("(0, 1) * (1, 0) = %f\n", vec2_dot(b, a));
 	printf("(1, 0) * (1, 0) = %f\n", vec2_dot(a, a));
 	printf("pos * pos = %f\n", vec2_dot(position, position));
+
+	vec4(v4, homo);
+	print_info(homo, VEC4_SIZE);
+	vec4_normalize(homo, tmp4);
+	print_info(tmp4, VEC4_SIZE);
+
 	return (0);
 }

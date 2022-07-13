@@ -1,7 +1,8 @@
 NAME = test_matrix_lib
 
-SRCS	= vector.c \
-			test_vector.c \
+vector	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c
+
+SRCS	= $(addprefix vector/,$(vector)) test_vector.c
 			# matrix.c
 HEADERS	= $(patsubst %.c,%.h,$(SRCS))
 OBJDIR	= obj
@@ -33,5 +34,6 @@ $(OBJDIR)/%.o: %.c | $(OBJDIR)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
+	mkdir $(OBJDIR)/vector
 
 .PHONY: all clean fclean re show
