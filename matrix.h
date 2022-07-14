@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 17:57:22 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/14 19:57:17 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ struct				s_mat4
 
 float	*mat4_zero(float *result);
 float	*mat4_identity(float *result);
+float	*mat4_mult(float *m1, float *m2, float *result);
+float	*mat4_scalar_mult(float *m, float s, float *result);
 
 #endif
