@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/16 15:09:38 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/16 15:24:56 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ float				*mat_add(float *a, float *b, size_t size, float *result);
 float				*mat4_zero(float *result);
 float				*mat4_identity(float *result);
 float				*mat4_add(float *a, float *b, float *result);
+float				*mat_transpose(float *m, size_t dim, float *result);
 float				*mat4_mult(float *m1, float *m2, float *result);
 float				*mat4_scalar_mult(float *m, float s, float *result);
 
