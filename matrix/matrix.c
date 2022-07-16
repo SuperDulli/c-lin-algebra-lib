@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:55:35 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/14 15:51:50 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/16 14:42:33 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ float	*mat4_identity(float *result)
 			result[i] = 1;
 		else
 			result[i] = 0;
+		i++;
+	}
+	return (result);
+}
+
+float	*mat_copy(float *m, size_t size, float *result)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		result[i] = m[i];
 		i++;
 	}
 	return (result);
