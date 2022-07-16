@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 19:30:26 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/14 20:01:46 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/16 14:43:43 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,28 @@
 
 float	*mat4_mult(float *m1, float *m2, float *result)
 {
-	size_t	i;
-	size_t	j;
-	const size_t	rows = 4;
-	const size_t	columns = 4;
-	float	tmp[MAT4_SIZE];
+	size_t			i;
+	size_t			j;
+	size_t			r;
+	const size_t	dim = 4;
+	float			tmp[MAT4_SIZE];
 
 	i = 0;
-	while (i < rows)
+	while (i < dim)
 	{
 		j = 0;
-		while (j < columns)
+		while (j < dim)
 		{
-			tmp[j * rows + i]
-				= m1[i] * m2[i * rows]
-				+ m1[(i + 1) * rows + 1] * m2[1]
-				+ m1[(i + 2) * rows + 1] * m2[2]
-				+ m1[(i + 3) * rows + 1] * m2[3];
+			r = 0;
+			tmp[j * dim + i] = 0;
+			while (r < dim)
+			{
+				tmp[j * dim + i] += m1[r * dim + i] * m2[j * dim + r];
+				r++;
+			}
 			j++;
 		}
 		i++;
 	}
-	i = 0;
-	while (i < MAT4_SIZE)
-	{
-		result[i] = tmp[i];
-		i++;
-	}
-	return (result);
+	return (mat_copy(tmp, MAT4_SIZE, result));
 }
