@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:26:36 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/14 20:00:07 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/16 14:20:34 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	print_matrix(float *m, size_t size)
 		while (j < edge_len)
 		{
 			index = i * edge_len + j; // row-major order
+			index = j * edge_len + i; // column-major order
 			printf("%.2zu=%zu%zu=%.2f, ", index, i + 1, j + 1, m[index]);
 			j++;
 		}
@@ -51,7 +52,9 @@ int	main(void)
 {
 	float	identity[MAT4_SIZE];
 	float	a[MAT4_SIZE];
+	float	b[MAT4_SIZE];
 	float	tmp[MAT4_SIZE];
+	int		i;
 
 	mat4_identity(identity);
 	print_matrix(identity, MAT4_SIZE);
@@ -60,4 +63,50 @@ int	main(void)
 	print_matrix(tmp, MAT4_SIZE);
 	mat4_mult(identity, tmp, tmp);
 	print_matrix(tmp, MAT4_SIZE);
+
+	i = 0;
+	a[i] = 5;
+	a[++i] = 2;
+	a[++i] = 8;
+	a[++i] = 3;
+
+	a[++i] = 7;
+	a[++i] = 3;
+	a[++i] = 10;
+	a[++i] = 3;
+
+	a[++i] = 9;
+	a[++i] = 3;
+	a[++i] = 2;
+	a[++i] = 4;
+
+	a[++i] = 10;
+	a[++i] = 8;
+	a[++i] = 3;
+	a[++i] = 8;
+
+	i = 0;
+	b[i] = 3;
+	b[++i] = 12;
+	b[++i] = 9;
+	b[++i] = 3;
+
+	b[++i] = 10;
+	b[++i] = 1;
+	b[++i] = 10;
+	b[++i] = 12;
+
+	b[++i] = 12;
+	b[++i] = 4;
+	b[++i] = 12;
+	b[++i] = 4;
+
+	b[++i] = 18;
+	b[++i] = 9;
+	b[++i] = 2;
+	b[++i] = 10;
+
+	mat4_mult(a, b, tmp);
+	print_matrix(tmp, MAT4_SIZE);
+
 }
