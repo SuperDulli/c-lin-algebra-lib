@@ -15,6 +15,7 @@ OBJS	= $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
+LFLAGS	= -lm
 
 # all: $(NAME)
 all: $(VECTOR_N) $(MATRIX_N)
@@ -52,9 +53,9 @@ $(OBJDIR):
 	mkdir $(OBJDIR)/MATRIX
 
 $(VECTOR_N): $(VECTOR_S)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LFLAGS)
 
 $(MATRIX_N): $(MATRIX_S)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LFLAGS)
 
 .PHONY: all clean fclean re show v m
