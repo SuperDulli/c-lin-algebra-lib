@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/19 12:17:52 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/19 13:58:20 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ struct				s_mat4
 
 float				*mat_copy(float *m, size_t size, float *result);
 float				*mat_add(float *a, float *b, size_t size, float *result);
+
+float				mat2_determinant(float *matrix);
+float				mat3_determinant(float *matrix);
+float				mat4_determinant(float *matrix);
 
 float				*mat4_zero(float *result);
 float				*mat4_identity(float *result);
