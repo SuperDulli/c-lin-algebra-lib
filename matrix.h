@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/16 15:24:56 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/19 12:17:52 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,52 @@
 # define MAT2_SIZE 4
 # define MAT3_SIZE 9
 # define MAT4_SIZE 16
+
+/*
+Matrix 2x2 representation:
+0/m11 2/m12
+1/m21 3/m22
+*/
+struct				s_mat2
+{
+	union
+	{
+		struct
+		{
+			float	m11;
+			float	m21;
+			float	m12;
+			float	m22;
+		};
+		float		v[MAT3_SIZE];
+	};
+};
+
+/*
+Matrix 3x3 representation:
+0/m11 3/m12 6/m13
+1/m21 4/m22 7/m23
+2/m31 5/m32 8/m33
+*/
+struct				s_mat3
+{
+	union
+	{
+		struct
+		{
+			float	m11;
+			float	m21;
+			float	m31;
+			float	m12;
+			float	m22;
+			float	m32;
+			float	m13;
+			float	m23;
+			float	m33;
+		};
+		float		v[MAT3_SIZE];
+	};
+};
 
 /*
 Matrix 4×4 representation:
