@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:26:36 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/16 15:27:55 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/19 13:25:08 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 void	print_matrix(float *m, size_t size)
 {
-	size_t			edge_len;
-	// struct s_mat4	*matrix;
-	size_t			index;
-	size_t			i;
-	size_t			j;
+	size_t	edge_len;
+	size_t	index;
+	size_t	i;
+	size_t	j;
 
+	// struct s_mat4	*matrix;
 	// matrix = NULL;
 	// matrix = (struct s_mat4 *)m;
 	// printf("%f, %f, %f, %f\n", matrix->m11, matrix->m12, matrix->m13,
@@ -66,52 +66,46 @@ int	main(void)
 	print_matrix(tmp, MAT4_SIZE);
 	mat4_mult(identity, tmp, tmp);
 	print_matrix(tmp, MAT4_SIZE);
-
 	i = 0;
 	a[i] = 5;
 	a[++i] = 2;
 	a[++i] = 8;
 	a[++i] = 3;
-
 	a[++i] = 7;
 	a[++i] = 3;
 	a[++i] = 10;
 	a[++i] = 3;
-
 	a[++i] = 9;
 	a[++i] = 3;
 	a[++i] = 2;
 	a[++i] = 4;
-
 	a[++i] = 10;
 	a[++i] = 8;
 	a[++i] = 3;
 	a[++i] = 8;
-
 	i = 0;
 	b[i] = 3;
 	b[++i] = 12;
 	b[++i] = 9;
 	b[++i] = 3;
-
 	b[++i] = 10;
 	b[++i] = 1;
 	b[++i] = 10;
 	b[++i] = 12;
-
 	b[++i] = 12;
 	b[++i] = 4;
 	b[++i] = 12;
 	b[++i] = 4;
-
 	b[++i] = 18;
 	b[++i] = 9;
 	b[++i] = 2;
 	b[++i] = 10;
-
 	mat4_mult(a, b, tmp);
 	print_matrix(tmp, MAT4_SIZE);
 	mat_transpose(tmp, 4, tmp2);
 	print_matrix(tmp2, MAT4_SIZE);
-
+	printf("det=%f\n", mat4_determinant(tmp2));
+	printf("det=%f\n", mat4_determinant(a));
+	printf("det=%f\n", mat4_determinant(b));
+	printf("det=%f\n", mat4_determinant(identity));
 }

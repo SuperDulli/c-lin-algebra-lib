@@ -2,11 +2,11 @@ NAME = lin_algebra_lib
 
 VECTOR_N= vector_tests
 VECTOR	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c cross.c
-VECTOR_S= $(addprefix vector/,$(VECTOR)) test_vector.c
+VECTOR_S= $(addprefix vector/,$(VECTOR)) vector_tests.c
 
 MATRIX_N= matrix_tests
-MATRIX	= matrix.c scalar_mult.c mult.c add.c transpose.c
-MATRIX_S= $(addprefix matrix/,$(MATRIX)) test_matrix.c
+MATRIX	= matrix.c scalar_mult.c mult.c add.c transpose.c determinant.c
+MATRIX_S= $(addprefix matrix/,$(MATRIX)) matrix_tests.c
 
 # SRCS	=
 HEADERS	= $(patsubst %.c,%.h,$(SRCS))
