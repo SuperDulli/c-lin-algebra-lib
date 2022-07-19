@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_matrix.c                                      :+:      :+:    :+:   */
+/*   matrix_tests.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:26:36 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/19 13:25:08 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/19 15:01:40 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_matrix(float *m, size_t size)
 			index = i * edge_len + j; // row-major order
 			index = j * edge_len + i; // column-major order
 			// printf("%2zu=%zu%zu=%5.0f, ", index, i + 1, j + 1, m[index]);
-			printf("%5.0f, ", m[index]);
+			printf("%5.7f, ", m[index]);
 			j++;
 		}
 		printf("\n");
@@ -58,6 +58,8 @@ int	main(void)
 	float	tmp[MAT4_SIZE];
 	float	tmp2[MAT4_SIZE];
 	int		i;
+	float	d2_a[MAT2_SIZE];
+	float	d2_tmp[MAT2_SIZE];
 
 	mat4_identity(identity);
 	print_matrix(identity, MAT4_SIZE);
@@ -108,4 +110,26 @@ int	main(void)
 	printf("det=%f\n", mat4_determinant(a));
 	printf("det=%f\n", mat4_determinant(b));
 	printf("det=%f\n", mat4_determinant(identity));
+	d2_a[0] = 4;
+	d2_a[1] = 5;
+	d2_a[2] = -7;
+	d2_a[3] = 3;
+	print_matrix(d2_a, MAT2_SIZE);
+	mat2_inverse(d2_a, d2_tmp);
+	print_matrix(d2_tmp, MAT2_SIZE);
+
+	float d3_a[MAT3_SIZE];
+	float d3_tmp[MAT3_SIZE];
+	d3_a[0] = 4;
+	d3_a[1] = 5;
+	d3_a[2] = -7;
+	d3_a[3] = 3;
+	d3_a[4] = -2;
+	d3_a[5] = 0;
+	d3_a[6] = 1;
+	d3_a[7] = -42;
+	d3_a[8] = 42;
+	print_matrix(d3_a, MAT3_SIZE);
+	mat3_inverse(d3_a, d3_tmp); // TODO
+	print_matrix(d3_tmp, MAT3_SIZE);
 }

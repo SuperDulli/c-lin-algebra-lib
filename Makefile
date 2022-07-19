@@ -5,7 +5,7 @@ VECTOR	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.
 VECTOR_S= $(addprefix vector/,$(VECTOR)) vector_tests.c
 
 MATRIX_N= matrix_tests
-MATRIX	= matrix.c scalar_mult.c mult.c add.c transpose.c determinant.c
+MATRIX	= matrix.c scalar_mult.c mult.c add.c transpose.c determinant.c inverse.c
 MATRIX_S= $(addprefix matrix/,$(MATRIX)) matrix_tests.c
 
 # SRCS	=
