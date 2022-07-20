@@ -6,13 +6,14 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/20 12:04:12 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:10:51 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATRIX_H
 # define MATRIX_H
 
+# define _USE_MATH_DEFINES
 # include <math.h>
 # include <stdbool.h>
 # include <stddef.h>
@@ -111,6 +112,14 @@ float				mat4_determinant(float *matrix);
 float				*mat2_inverse(float *m, float *result);
 float				*mat3_inverse(float *m, float *result);
 float				*mat4_inverse(float *m, float *result);
+
+float				*mat4_scale(float x, float y, float z, float *result);
+
+float				*mat4_translate(float x, float y, float z, float *result);
+
+float				*mat4_rotate_x(float angle, float *result);
+float				*mat4_rotate_y(float angle, float *result);
+float				*mat4_rotate_z(float angle, float *result);
 
 float				*mat4_zero(float *result);
 float				*mat4_identity(float *result);

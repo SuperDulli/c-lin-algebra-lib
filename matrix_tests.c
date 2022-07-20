@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:26:36 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/20 12:06:57 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:18:08 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_matrix(float *m, size_t size)
 			index = i * edge_len + j; // row-major order
 			index = j * edge_len + i; // column-major order
 			// printf("%2zu=%zu%zu=%5.0f, ", index, i + 1, j + 1, m[index]);
-			printf("%5.7f, ", m[index]);
+			printf("%5.2f, ", m[index]);
 			j++;
 		}
 		printf("\n");
@@ -154,4 +154,28 @@ int	main(void)
 	print_matrix(d4_a, MAT4_SIZE);
 	mat4_inverse(d4_a, d4_tmp);
 	print_matrix(d4_tmp, MAT4_SIZE);
+
+	printf("Transformation matricies:\n");
+	float scaling[MAT4_SIZE];
+	float translating[MAT4_SIZE];
+	float rotation_x[MAT4_SIZE];
+	float rotation_y[MAT4_SIZE];
+	float rotation_z[MAT4_SIZE];
+	mat4_scale(1, 7, 49, scaling);
+	mat4_translate(-1, -2, 3, translating);
+	mat4_rotate_x(7, rotation_x);
+	mat4_rotate_y(7, rotation_y);
+	mat4_rotate_z(7, rotation_z);
+	print_matrix(scaling, MAT4_SIZE);
+	print_matrix(translating, MAT4_SIZE);
+	print_matrix(rotation_x, MAT4_SIZE);
+	print_matrix(rotation_y, MAT4_SIZE);
+	print_matrix(rotation_z, MAT4_SIZE);
+
+	printf("comibined transforms:\n");
+	mat4_mult(translating, scaling, tmp);
+	mat4_mult(tmp, rotation_x, tmp);
+	mat4_mult(tmp, rotation_y, tmp);
+	mat4_mult(tmp, rotation_z, tmp);
+	print_matrix(tmp, MAT4_SIZE);
 }
