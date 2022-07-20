@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/19 14:55:13 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/20 12:04:12 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ float				mat4_determinant(float *matrix);
 
 float				*mat2_inverse(float *m, float *result);
 float				*mat3_inverse(float *m, float *result);
+float				*mat4_inverse(float *m, float *result);
 
 float				*mat4_zero(float *result);
 float				*mat4_identity(float *result);

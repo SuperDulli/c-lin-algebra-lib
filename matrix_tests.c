@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:26:36 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/19 15:01:40 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/20 12:06:57 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,28 @@ int	main(void)
 	d3_a[7] = -42;
 	d3_a[8] = 42;
 	print_matrix(d3_a, MAT3_SIZE);
-	mat3_inverse(d3_a, d3_tmp); // TODO
+	mat3_inverse(d3_a, d3_tmp);
 	print_matrix(d3_tmp, MAT3_SIZE);
+
+	float d4_a[MAT4_SIZE];
+	float d4_tmp[MAT4_SIZE];
+	d4_a[0] = 4;
+	d4_a[1] = 5;
+	d4_a[2] = -7;
+	d4_a[3] = 3;
+	d4_a[4] = -2;
+	d4_a[5] = 0;
+	d4_a[6] = 1;
+	d4_a[7] = -42;
+	d4_a[8] = 42;
+	d4_a[9] = 0;
+	d4_a[10] = 10;
+	d4_a[11] = 11;
+	d4_a[12] = 12;
+	d4_a[13] = 13;
+	d4_a[14] = 14;
+	d4_a[15] = 15;
+	print_matrix(d4_a, MAT4_SIZE);
+	mat4_inverse(d4_a, d4_tmp);
+	print_matrix(d4_tmp, MAT4_SIZE);
 }
