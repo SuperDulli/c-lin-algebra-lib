@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 12:48:26 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 17:31:54 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:19:47 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,14 @@ struct				s_quad
 	float			w;
 };
 
+typedef struct s_vec2	t_vec2;
+typedef struct s_vec3	t_vec3;
+typedef struct s_vec4	t_vec4;
+
 // vec2 functions
 
 float				*vec2(float x, float y, float *result);
+float				*vec2_copy(float *vec, float *result);
 float				vec2_length(float *vec);
 float				vec2_length_squared(float *vec);
 float				*vec2_scalar_mult(float *vec, float s, float *result);
@@ -84,6 +89,7 @@ bool				vec2_is_zero(float *vec);
 bool				vec2_is_equal(float *v1, float *v2);
 
 float				*vec3(float x, float y, float z, float *result);
+float				*vec3_copy(float *vec, float *result);
 float				vec3_length(float *vec);
 float				vec3_length_squared(float *vec);
 float				*vec3_scalar_mult(float *vec, float s, float *result);
@@ -98,6 +104,7 @@ float				*vec3_cross(float *v1, float *v2, float *result);
 
 struct s_quad		tuple4(float x, float y, float z, float w);
 float				*vec4(struct s_quad values, float *result);
+float				*vec4_copy(float *vec, float *result);
 float				vec4_length(float *vec);
 float				vec4_length_squared(float *vec);
 float				*vec4_scalar_mult(float *vec, float s, float *result);

@@ -1,7 +1,7 @@
 NAME = lin_algebra_lib.a
 
 VECTOR_N= vector_tests
-VECTOR	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c cross.c
+VECTOR	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c cross.c copy.c
 VECTOR_S= $(addprefix vector/,$(VECTOR)) # vector_tests.c
 
 MATRIX_N= matrix_tests
