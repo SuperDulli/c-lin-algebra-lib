@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:27:06 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/13 17:17:37 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:07:27 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 void	print_vec2(struct s_vec2 *vec)
 {
 	printf("vector2(%f,%f,[%f,%f])\n", vec->x, vec->y, vec->v[0], vec->v[1]);
+}
+
+float	*vec_fill(float value, size_t len, float *result)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		result[i] = value;
+		i++;
+	}
+	return (result);
 }
 
 float	*vec2(float x, float y, float *result)

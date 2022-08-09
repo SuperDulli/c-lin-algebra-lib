@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 12:48:26 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/26 13:19:47 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:34:37 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <math.h>
 # include <stdbool.h>
+# include <stddef.h> // size_t
 
 # define VEC2_SIZE 2
 # define VEC3_SIZE 3
@@ -73,6 +74,8 @@ struct				s_quad
 typedef struct s_vec2	t_vec2;
 typedef struct s_vec3	t_vec3;
 typedef struct s_vec4	t_vec4;
+
+float				*vec_fill(float value, size_t len, float *result);
 
 // vec2 functions
 
