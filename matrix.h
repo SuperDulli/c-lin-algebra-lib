@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/07/20 13:10:51 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:01:16 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stddef.h>
+# include "vector.h"
 
 # define MAT2_SIZE 4
 # define MAT3_SIZE 9
@@ -127,5 +128,9 @@ float				*mat4_add(float *a, float *b, float *result);
 float				*mat_transpose(float *m, size_t dim, float *result);
 float				*mat4_mult(float *m1, float *m2, float *result);
 float				*mat4_scalar_mult(float *m, float s, float *result);
+
+// matrix vector product
+
+float				*mat4_mult_vec4(float *m, float *vec, float *result);
 
 #endif
