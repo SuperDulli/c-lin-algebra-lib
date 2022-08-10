@@ -1,7 +1,7 @@
 NAME = lin_algebra_lib.a
 
 VECTOR_N= vector_tests
-VECTOR	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c cross.c copy.c
+VECTOR	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c cross.c copy.c clamp.c
 VECTOR_S= $(addprefix vector/,$(VECTOR))
 VECTOR_T= $(VECTOR_S) vector_tests.c
 
@@ -20,6 +20,7 @@ CFLAGS	= -Wall -Wextra -Werror -g
 LFLAGS	= -lm
 
 all: $(NAME)
+	make clean
 # all: $(VECTOR_N) $(MATRIX_N)
 
 clean:

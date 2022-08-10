@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 12:48:26 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/08/08 15:34:37 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/08/10 11:57:17 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ float				*vec3_normalize(float *vec, float *result);
 float				*vec3_add(float *v1, float *v2, float *result);
 float				*vec3_sub(float *v1, float *v2, float *result);
 float				vec3_dot(float *v1, float *v2);
+float				*vec3_clamp(float *vec, float lower, float upper, float *result);
 bool				vec3_is_zero(float *vec);
 bool				vec3_is_equal(float *v1, float *v2);
 
