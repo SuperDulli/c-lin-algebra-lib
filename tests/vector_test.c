@@ -6,7 +6,7 @@
 
 #include "../vector.h"
 
-#define VECTOR_DATA_POINTS DataPoints(float, 0, 1, 2, -1, -2, FLT_MIN, FLT_MAX, FLT_EPSILON, INFINITY) //, NAN)
+#define VECTOR_DATA_POINTS DataPoints(float, 0, 1, 2, -1, -2) //, FLT_MIN, FLT_MAX, FLT_EPSILON, INFINITY) //, NAN)
 
 int	cr_user_s_vec3_eq(struct s_vec3 *a, struct s_vec3 *b)
 {
@@ -83,7 +83,6 @@ TheoryDataPoints(vector3, length_is_non_negative) =
 Theory((float a, float b, float c), vector3, length_is_non_negative)
 {
 	float	vec[VEC3_SIZE];
-
 	float	len;
 	float	zero;
 
@@ -93,4 +92,34 @@ Theory((float a, float b, float c), vector3, length_is_non_negative)
 	// cr_log_info("(a,b,c): %f, %f, %f", vec[0], vec[1], vec[2]);
 	// cr_log_info("vec_length: %f", len);
 	cr_expect(ge(len, zero), "length of vector should not be negative.");
+	len = vec3_length_squared(vec);
+	// cr_log_info("vec_length: %f", len);
+	cr_expect(ge(len, zero), "length squared of vector should not be negative.");
+}
+
+// TODO: test scalar multiplication
+
+TheoryDataPoints(vector3, normalize) =
+{
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS
+};
+
+Theory((float a, float b, float c), vector3, normalize)
+{
+	float	vec[VEC3_SIZE];
+	float	len;
+	float	one;
+
+	vec3(a, b, c, vec);
+	one = 1.f;
+	cr_log_info("(a,b,c) before: %f, %f, %f", vec[0], vec[1], vec[2]);
+	// normalizing a zero vector makes no sense
+	cr_assume_not(a == 0 && b == 0 && c == 0);
+	vec3_normalize(vec, vec);
+	len = vec3_length(vec);
+	cr_log_info("(a,b,c) after : %f, %f, %f", vec[0], vec[1], vec[2]);
+	cr_log_info("vec_length: %f", len);
+	cr_expect(epsilon_eq(flt, len, one, FLT_EPSILON), "noramlized vector should be of length one.");
 }
