@@ -1,7 +1,12 @@
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
+#include <criterion/theories.h>
+
+#include <float.h>
 
 #include "../vector.h"
+
+#define VECTOR_DATA_POINTS DataPoints(float, 0, 1, 2, -1, -2, FLT_MIN, FLT_MAX, FLT_EPSILON, INFINITY) //, NAN)
 
 int	cr_user_s_vec3_eq(struct s_vec3 *a, struct s_vec3 *b)
 {
@@ -22,7 +27,7 @@ char	*cr_user_s_vec3_tostr(struct s_vec3 *vec)
 Test(vector3, size)
 {
 	cr_log_info("vec3 size: %d", VEC3_SIZE);
-	// cr_assert(eq(int, VEC3_SIZE, 3), "vector3 size is not 3.");
+	cr_assert(eq(int, VEC3_SIZE, 3), "vector3 size is not 3.");
 }
 
 Test(vector3, create_zero)
@@ -55,4 +60,37 @@ Test(vector3, fill_zero)
 	zero_vector[2] = 0.f;
 	vec_fill(0.f, VEC3_SIZE, vector);
 	cr_expect(eq(flt[VEC3_SIZE], vector, zero_vector));
+}
+
+Test(vector3, copy)
+{
+	float	src[VEC3_SIZE];
+	float	dst[VEC3_SIZE];
+
+	vec3(1, 2, 3, src);
+	vec3_copy(src, dst);
+	cr_expect(ne(ptr, &src[0], &dst[0]), "copy should be deep.");
+	cr_expect(eq(flt[VEC3_SIZE], src, dst), "values should be the same after copy.");
+}
+
+TheoryDataPoints(vector3, length_is_non_negative) =
+{
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS
+};
+
+Theory((float a, float b, float c), vector3, length_is_non_negative)
+{
+	float	vec[VEC3_SIZE];
+
+	float	len;
+	float	zero;
+
+	vec3(a, b, c, vec);
+	zero = 0.f;
+	len = vec3_length(vec);
+	// cr_log_info("(a,b,c): %f, %f, %f", vec[0], vec[1], vec[2]);
+	// cr_log_info("vec_length: %f", len);
+	cr_expect(ge(len, zero), "length of vector should not be negative.");
 }
