@@ -1,6 +1,7 @@
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 #include <criterion/theories.h>
+#include <criterion/parameterized.h>
 
 #include <float.h>
 
@@ -21,6 +22,13 @@ char	*cr_user_s_vec3_tostr(struct s_vec3 *vec)
 {
 	char	*out;
 	cr_asprintf(&out, "(struct s_vec3) { x=%f, y=%f, z=%f }", vec->x, vec->y, vec->z);
+	return (out);
+}
+
+char	*vec3_tostr(float *vec)
+{
+	char	*out;
+	cr_asprintf(&out, "(vec3) { x=%f, y=%f, z=%f }", vec[0], vec[1], vec[2]);
 	return (out);
 }
 
@@ -121,5 +129,110 @@ Theory((float a, float b, float c), vector3, normalize)
 	len = vec3_length(vec);
 	// cr_log_info("(a,b,c) after : %f, %f, %f", vec[0], vec[1], vec[2]);
 	// cr_log_info("vec_length: %f", len);
-	cr_expect(epsilon_eq(flt, len, one, FLT_EPSILON), "noramlized vector should be of length one.");
+	cr_expect(epsilon_eq(flt, len, one, FLT_EPSILON), "normalized vector should be of length one.");
+}
+
+TheoryDataPoints(vector3, dot_product) =
+{
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS
+};
+
+Theory((float a, float b, float c, float x, float y, float z), vector3, dot_product, .disabled=1)
+{
+	float	v1[VEC3_SIZE];
+	float	v2[VEC3_SIZE];
+	float	dot_product;
+
+	vec3(a, b, c, v1);
+	vec3(x, y, z, v2);
+	dot_product = vec3_dot(v1, v2);
+	cr_log_info("dot_product of %s and %s = %f", vec3_tostr(v1), vec3_tostr(v2), dot_product);
+}
+
+struct params_binary_operation_scalar_result
+{
+	float	a_x, a_y, a_z;
+	float	b_x, b_y, b_z;
+	float	result;
+};
+
+ParameterizedTestParameters(vector3, dot_product_params)
+{
+	static struct params_binary_operation_scalar_result params[] =
+	{
+		{
+			0, 0, 0,
+			0, 0, 0,
+			0
+		},
+		{
+			0, 0, 0,
+			1, 0, 0,
+			0
+		},
+		{
+			1, 0, 0,
+			0, 0, 0,
+			0
+		},
+		{
+			0, 1, 0,
+			0, 1, 0,
+			1
+		},
+		{
+			0, -1, 0,
+			0, -1, 0,
+			1
+		},
+		{
+			0, 1, 0,
+			0, -1, 0,
+			-1
+		},
+		{
+			0, 1, 0,
+			0, 0, 1,
+			0
+		},
+		{
+			0, 1, 0,
+			1, 0, 1,
+			0
+		},
+		{
+			1, 1, 0,
+			1, 0, 1,
+			1
+		},
+		{
+			3, 4, 5,
+			1, 0, 0,
+			3
+		},
+		{
+			3, 4, 5,
+			1, 1, 0,
+			7
+		},
+	};
+
+	return (cr_make_param_array(struct params_binary_operation_scalar_result, params, sizeof(params) / sizeof(struct params_binary_operation_scalar_result)));
+}
+
+ParameterizedTest(struct params_binary_operation_scalar_result *tupel, vector3, dot_product_params)
+{
+	float	v1[VEC3_SIZE];
+	float	v2[VEC3_SIZE];
+	float	dot_product;
+
+	vec3(tupel->a_x, tupel->a_y, tupel->a_z, v1);
+	vec3(tupel->b_x, tupel->b_y, tupel->b_z, v2);
+	dot_product = vec3_dot(v1, v2);
+	cr_expect(epsilon_eq(flt, dot_product, tupel->result, FLT_EPSILON), "dot_product of %s and %s = %f == %f", vec3_tostr(v1), vec3_tostr(v2), dot_product, tupel->result);
 }
