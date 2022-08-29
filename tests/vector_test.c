@@ -114,12 +114,12 @@ Theory((float a, float b, float c), vector3, normalize)
 
 	vec3(a, b, c, vec);
 	one = 1.f;
-	cr_log_info("(a,b,c) before: %f, %f, %f", vec[0], vec[1], vec[2]);
+	// cr_log_info("(a,b,c) before: %f, %f, %f", vec[0], vec[1], vec[2]);
 	// normalizing a zero vector makes no sense
 	cr_assume_not(a == 0 && b == 0 && c == 0);
 	vec3_normalize(vec, vec);
 	len = vec3_length(vec);
-	cr_log_info("(a,b,c) after : %f, %f, %f", vec[0], vec[1], vec[2]);
-	cr_log_info("vec_length: %f", len);
+	// cr_log_info("(a,b,c) after : %f, %f, %f", vec[0], vec[1], vec[2]);
+	// cr_log_info("vec_length: %f", len);
 	cr_expect(epsilon_eq(flt, len, one, FLT_EPSILON), "noramlized vector should be of length one.");
 }
