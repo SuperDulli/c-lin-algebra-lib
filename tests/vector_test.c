@@ -7,7 +7,7 @@
 
 #include "../vector.h"
 
-#define VECTOR_DATA_POINTS DataPoints(float, 0, 1, 2, -1, -2) //, FLT_MIN, FLT_MAX, FLT_EPSILON, INFINITY) //, NAN)
+#define VECTOR_DATA_POINTS DataPoints(float, 0, 0.1, 0.5, 1, 2, -1, -2) //, FLT_MIN, FLT_MAX, FLT_EPSILON, INFINITY) //, NAN)
 
 int	cr_user_s_vec3_eq(struct s_vec3 *a, struct s_vec3 *b)
 {
@@ -235,4 +235,27 @@ ParameterizedTest(struct params_binary_operation_scalar_result *tupel, vector3, 
 	vec3(tupel->b_x, tupel->b_y, tupel->b_z, v2);
 	dot_product = vec3_dot(v1, v2);
 	cr_expect(epsilon_eq(flt, dot_product, tupel->result, FLT_EPSILON), "dot_product of %s and %s = %f == %f", vec3_tostr(v1), vec3_tostr(v2), dot_product, tupel->result);
+}
+
+TheoryDataPoints(vector3, shift_positive) =
+{
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS
+};
+
+Theory((float a, float b, float c), vector3, shift_positive)
+{
+	float	vec[VEC3_SIZE];
+
+	vec3(a, b, c, vec);
+	cr_assume_geq(vec[0], -1.f);
+	cr_assume_geq(vec[1], -1.f);
+	cr_assume_geq(vec[2], -1.f);
+	cr_assume_leq(vec[0], 1.f);
+	cr_assume_leq(vec[1], 1.f);
+	cr_assume_leq(vec[2], 1.f);
+	vec3_shift_positive(vec, vec);
+	cr_expect(all(ge(flt, vec[0], 0), ge(flt, vec[1], 0), ge(flt, vec[2], 0)), "values should all be atleast 0 or higher.");
+	cr_expect(all(le(flt, vec[0], 1), le(flt, vec[1], 1), le(flt, vec[2], 1)), "values should all be 1 at max.");
 }

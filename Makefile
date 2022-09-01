@@ -5,12 +5,33 @@ TESTS = $(wildcard $(TEST)/*.c)
 TESTBINS = $(patsubst $(TEST)/%.c,$(TEST)/bin/%,$(TESTS))
 
 VECTOR_N= $(TEST)/bin/vector_test
-VECTOR	= vector.c length.c length_squared.c scalar_mult.c normalize.c add.c sub.c dot.c is_zero.c is_equal.c cross.c copy.c clamp.c
+VECTOR	= vector.c \
+			length.c \
+			length_squared.c \
+			scalar_mult.c \
+			normalize.c \
+			add.c sub.c \
+			dot.c \
+			is_zero.c \
+			is_equal.c \
+			cross.c \
+			copy.c \
+			clamp.c \
+			shift.c
 VECTOR_S= $(addprefix vector/,$(VECTOR))
 VECTOR_T= $(VECTOR_S) $(TEST)/vector_test.c
 
 MATRIX_N= $(TEST)/bin/matrix_test
-MATRIX	= matrix.c scalar_mult.c mult.c add.c transpose.c determinant.c inverse.c scale.c translate.c rotate.c
+MATRIX	= matrix.c \
+			scalar_mult.c \
+			mult.c \
+			add.c \
+			transpose.c \
+			determinant.c \
+			inverse.c \
+			scale.c \
+			translate.c \
+			rotate.c
 MATRIX_S= $(addprefix matrix/,$(MATRIX))
 MATRIX_T= $(MATRIX_S) $(TEST)/matrix_tests.c
 
