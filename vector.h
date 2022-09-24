@@ -100,7 +100,8 @@ float				*vec3_normalize(float *vec, float *result);
 float				*vec3_add(float *v1, float *v2, float *result);
 float				*vec3_sub(float *v1, float *v2, float *result);
 float				vec3_dot(float *v1, float *v2);
-float				*vec3_clamp(float *vec, float lower, float upper, float *result);
+float				*vec3_clamp(float *vec, float lower, float upper, \
+					float *result);
 bool				vec3_is_zero(float *vec);
 bool				vec3_is_equal(float *v1, float *v2);
 
