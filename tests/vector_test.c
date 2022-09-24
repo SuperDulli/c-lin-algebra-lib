@@ -1,12 +1,13 @@
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 #include <criterion/theories.h>
+#include <criterion/parameterized.h>
 
 #include <float.h>
 
 #include "../vector.h"
 
-#define VECTOR_DATA_POINTS DataPoints(float, 0, 1, 2, -1, -2) //, FLT_MIN, FLT_MAX, FLT_EPSILON, INFINITY) //, NAN)
+#define VECTOR_DATA_POINTS DataPoints(float, 0, 0.1, 0.5, 1, 2, -1, -2) //, FLT_MIN, FLT_MAX, FLT_EPSILON, INFINITY) //, NAN)
 
 int	cr_user_s_vec3_eq(struct s_vec3 *a, struct s_vec3 *b)
 {
@@ -21,6 +22,13 @@ char	*cr_user_s_vec3_tostr(struct s_vec3 *vec)
 {
 	char	*out;
 	cr_asprintf(&out, "(struct s_vec3) { x=%f, y=%f, z=%f }", vec->x, vec->y, vec->z);
+	return (out);
+}
+
+char	*vec3_tostr(float *vec)
+{
+	char	*out;
+	cr_asprintf(&out, "(vec3) { x=%f, y=%f, z=%f }", vec[0], vec[1], vec[2]);
 	return (out);
 }
 
@@ -114,12 +122,140 @@ Theory((float a, float b, float c), vector3, normalize)
 
 	vec3(a, b, c, vec);
 	one = 1.f;
-	cr_log_info("(a,b,c) before: %f, %f, %f", vec[0], vec[1], vec[2]);
+	// cr_log_info("(a,b,c) before: %f, %f, %f", vec[0], vec[1], vec[2]);
 	// normalizing a zero vector makes no sense
 	cr_assume_not(a == 0 && b == 0 && c == 0);
 	vec3_normalize(vec, vec);
 	len = vec3_length(vec);
-	cr_log_info("(a,b,c) after : %f, %f, %f", vec[0], vec[1], vec[2]);
-	cr_log_info("vec_length: %f", len);
-	cr_expect(epsilon_eq(flt, len, one, FLT_EPSILON), "noramlized vector should be of length one.");
+	// cr_log_info("(a,b,c) after : %f, %f, %f", vec[0], vec[1], vec[2]);
+	// cr_log_info("vec_length: %f", len);
+	cr_expect(epsilon_eq(flt, len, one, FLT_EPSILON), "normalized vector should be of length one.");
+}
+
+TheoryDataPoints(vector3, dot_product) =
+{
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS
+};
+
+Theory((float a, float b, float c, float x, float y, float z), vector3, dot_product, .disabled=1)
+{
+	float	v1[VEC3_SIZE];
+	float	v2[VEC3_SIZE];
+	float	dot_product;
+
+	vec3(a, b, c, v1);
+	vec3(x, y, z, v2);
+	dot_product = vec3_dot(v1, v2);
+	cr_log_info("dot_product of %s and %s = %f", vec3_tostr(v1), vec3_tostr(v2), dot_product);
+}
+
+struct params_binary_operation_scalar_result
+{
+	float	a_x, a_y, a_z;
+	float	b_x, b_y, b_z;
+	float	result;
+};
+
+ParameterizedTestParameters(vector3, dot_product_params)
+{
+	static struct params_binary_operation_scalar_result params[] =
+	{
+		{
+			0, 0, 0,
+			0, 0, 0,
+			0
+		},
+		{
+			0, 0, 0,
+			1, 0, 0,
+			0
+		},
+		{
+			1, 0, 0,
+			0, 0, 0,
+			0
+		},
+		{
+			0, 1, 0,
+			0, 1, 0,
+			1
+		},
+		{
+			0, -1, 0,
+			0, -1, 0,
+			1
+		},
+		{
+			0, 1, 0,
+			0, -1, 0,
+			-1
+		},
+		{
+			0, 1, 0,
+			0, 0, 1,
+			0
+		},
+		{
+			0, 1, 0,
+			1, 0, 1,
+			0
+		},
+		{
+			1, 1, 0,
+			1, 0, 1,
+			1
+		},
+		{
+			3, 4, 5,
+			1, 0, 0,
+			3
+		},
+		{
+			3, 4, 5,
+			1, 1, 0,
+			7
+		},
+	};
+
+	return (cr_make_param_array(struct params_binary_operation_scalar_result, params, sizeof(params) / sizeof(struct params_binary_operation_scalar_result)));
+}
+
+ParameterizedTest(struct params_binary_operation_scalar_result *tupel, vector3, dot_product_params)
+{
+	float	v1[VEC3_SIZE];
+	float	v2[VEC3_SIZE];
+	float	dot_product;
+
+	vec3(tupel->a_x, tupel->a_y, tupel->a_z, v1);
+	vec3(tupel->b_x, tupel->b_y, tupel->b_z, v2);
+	dot_product = vec3_dot(v1, v2);
+	cr_expect(epsilon_eq(flt, dot_product, tupel->result, FLT_EPSILON), "dot_product of %s and %s = %f == %f", vec3_tostr(v1), vec3_tostr(v2), dot_product, tupel->result);
+}
+
+TheoryDataPoints(vector3, shift_positive) =
+{
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS,
+	VECTOR_DATA_POINTS
+};
+
+Theory((float a, float b, float c), vector3, shift_positive)
+{
+	float	vec[VEC3_SIZE];
+
+	vec3(a, b, c, vec);
+	cr_assume_geq(vec[0], -1.f);
+	cr_assume_geq(vec[1], -1.f);
+	cr_assume_geq(vec[2], -1.f);
+	cr_assume_leq(vec[0], 1.f);
+	cr_assume_leq(vec[1], 1.f);
+	cr_assume_leq(vec[2], 1.f);
+	vec3_shift_positive(vec, vec);
+	cr_expect(all(ge(flt, vec[0], 0), ge(flt, vec[1], 0), ge(flt, vec[2], 0)), "values should all be atleast 0 or higher.");
+	cr_expect(all(le(flt, vec[0], 1), le(flt, vec[1], 1), le(flt, vec[2], 1)), "values should all be 1 at max.");
 }
