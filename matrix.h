@@ -6,7 +6,7 @@
 /*   By: chelmerd <chelmerd@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:46:40 by chelmerd          #+#    #+#             */
-/*   Updated: 2022/08/08 15:01:16 by chelmerd         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:46:20 by chelmerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ struct				s_mat2
 			float	m12;
 			float	m22;
 		};
-		float		v[MAT3_SIZE];
+		float		v[MAT2_SIZE];
 	};
 };
 
